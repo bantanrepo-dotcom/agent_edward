@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Edward · digital architect</title>
+  <style>
+    /* -------------------- RESET & GLOBAL -------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0c10;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #eaeef2;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* inter font via fallback (no external CDN to keep pure one-file) */
+    h1, h2, h3, .nav-link, .btn, .badge, .oath-text {
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* -------------------- TYPOGRAPHY & UTILITY -------------------- */
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #cfb87c, #f0e6c5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      border-bottom: 1px solid rgba(207, 184, 124, 0.3);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .gold {
+      color: #cfb87c;
+      font-weight: 500;
+    }
+
+    .badge {
+      background: rgba(207, 184, 124, 0.1);
+      border: 1px solid rgba(207, 184, 124, 0.3);
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    /* -------------------- HEADER / NAV -------------------- */
+    .navbar {
+      padding: 1.8rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(11, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid #1f2128;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 500;
+      background: linear-gradient(145deg, #fff, #cfb87c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      border-right: 2px solid #2a2c36;
+      padding-right: 1.8rem;
+    }
+    .logo span {
+      font-size: 1rem;
+      color: #7f8a9e;
+      display: block;
+      letter-spacing: 3px;
+      -webkit-text-fill-color: #7f8a9e;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+    }
+
+    .nav-links a {
+      color: #bdc3d0;
+      text-decoration: none;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.2s;
+      font-weight: 400;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a:hover {
+      color: #cfb87c;
+      border-bottom-color: #cfb87c;
+    }
+
+    /* -------------------- HERO -------------------- */
+    .hero {
+      padding: 5rem 0 4rem 0;
+    }
+
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-left {
+      flex: 1 1 350px;
+    }
+
+    .hero-left h1 {
+      font-size: 4rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .hero-left h1 .smaller {
+      font-size: 1.8rem;
+      display: block;
+      color: #a5abbd;
+      font-weight: 300;
+      letter-spacing: 6px;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #a8b0c5;
+      max-width: 500px;
+      margin: 2rem 0;
+      border-left: 4px solid #cfb87c;
+      padding-left: 1.8rem;
+    }
+
+    .hero-right {
+      flex: 1 1 300px;
+      background: #15171e;
+      border-radius: 40px;
+      padding: 2.2rem;
+      border: 1px solid #2f313c;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .stat-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 5px #cfb87c);
+    }
+    .stat-text p:first-child {
+      font-weight: 600;
+      color: #cfb87c;
+    }
+
+    /* -------------------- intro / oath -------------------- */
+    .intro-section {
+      background: #0f1117;
+      padding: 5rem 0;
+      border-radius: 3rem 3rem 0 0;
+      margin-top: 2rem;
+    }
+
+    .oath-block {
+      background: #1a1d26;
+      border-radius: 32px;
+      padding: 2.5rem;
+      border: 1px solid #2e313e;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .oath-block::before {
+      content: "“";
+      font-size: 8rem;
+      color: #cfb87c;
+      opacity: 0.2;
+      font-family: serif;
+      position: absolute;
+      top: -10px;
+      left: 10px;
+    }
+
+    .oath-text {
+      font-size: 1.6rem;
+      font-style: italic;
+      color: #f2e9d0;
+      text-align: center;
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+
+    /* -------------------- BENEFITS GRID -------------------- */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+      margin: 4rem 0;
+    }
+
+    .benefit-card {
+      background: #14171f;
+      border: 1px solid #2c2f3a;
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      transition: 0.2s ease;
+    }
+
+    .benefit-card:hover {
+      border-color: #cfb87c;
+      transform: translateY(-6px);
+      background: #1a1e29;
+    }
+
+    .benefit-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #cfb87c;
+      opacity: 0.4;
+      line-height: 1;
+    }
+
+    .benefit-title {
+      font-size: 1.2rem;
+      margin: 1rem 0 0.5rem 0;
+      font-weight: 500;
+      color: #f0eae0;
+    }
+
+    .benefit-desc {
+      color: #a0a8bb;
+      font-size: 0.9rem;
+    }
+
+    /* -------------------- QUOTE / MONEY NOTE -------------------- */
+    .philosophy {
+      background: #0c0e14;
+      border-radius: 28px;
+      padding: 3rem;
+      margin: 4rem 0;
+      border-left: 8px solid #cfb87c;
+    }
+
+    .philosophy p {
+      font-size: 1.3rem;
+      color: #ccd2e0;
+    }
+
+    /* -------------------- CONTACT / JOIN CARD -------------------- */
+    .contact-section {
+      background: linear-gradient(145deg, #0a0c12, #131722);
+      border-radius: 40px;
+      padding: 4rem 2.5rem;
+      margin: 5rem 0;
+      border: 1px solid #3d3f4b;
+      box-shadow: 0 20px 30px -10px black;
+    }
+
+    .two-col {
+      display: flex;
+      gap: 4rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .join-info {
+      flex: 2 1 300px;
+    }
+
+    .join-info h3 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .highlight-box {
+      background: #1e222d;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #3b3f4e;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+
+    .contact-method .icon {
+      background: #cfb87c20;
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      color: #cfb87c;
+      font-weight: 500;
+    }
+
+    .btn {
+      background: transparent;
+      border: 2px solid #cfb87c;
+      color: #cfb87c;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+
+    .btn:hover {
+      background: #cfb87c;
+      color: #0b0c10;
+    }
+
+    .form-placeholder {
+      flex: 1 1 250px;
+      background: #00000030;
+      border-radius: 30px;
+      padding: 2rem;
+      backdrop-filter: blur(5px);
+      border: 2px dashed #cfb87c55;
+      text-align: center;
+    }
+
+    .form-placeholder p {
+      color: #9b8e6f;
+    }
+
+    hr {
+      border-color: #2a2d3a;
+      margin: 2rem 0;
+    }
+
+    /* -------------------- FOOTER -------------------- */
+    .footer {
+      padding: 2rem 0 3rem;
+      color: #6f768b;
+      font-size: 0.9rem;
+      border-top: 1px solid #1f232e;
+    }
+
+    /* -------------------- RESPONSIVE -------------------- */
+    @media (max-width: 700px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .logo {
+        border-right: none;
+      }
+      .hero-left h1 {
+        font-size: 2.8rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== AGENT EDWARD – PRO SINGLE PAGE ========== -->
+<header class="navbar">
+  <div class="container nav-container">
+    <div class="logo">
+      AGENT EDWARD <span>digital architect</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">intro</a>
+      <a href="#">benefits</a>
+      <a href="#">contact</a>
+      <a href="#">join</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO SECTION (AGENT EDWARD INTERFACE) -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="badge">✦ official liaison ✦</div>
+        <h1>
+          <span class="smaller">you've reached</span>
+          agent edward
+        </h1>
+        <p class="hero-desc">
+          I architect elite digital identities & gateways. 
+          Below, the unaltered data from the union – 
+          reshaped for clarity & impact.
+        </p>
+        <div style="display: flex; gap: 1.5rem;">
+          <div><span class="gold">12+</span> yrs nexus</div>
+          <div><span class="gold">∞</span> confidentiality</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div style="font-size: 1.3rem;">⚡ live from helpline</div>
+        <div class="stat-item">
+          <span class="stat-icon">◉</span>
+          <div class="stat-text"><p>response time</p><p>under 4h</p></div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">◉</span>
+          <div class="stat-text"><p>secure channel</p><p>since origination</p></div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">◉</span>
+          <div class="stat-text"><p>membership</p><p>by dedication only</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRIEF INTRODUCTION + OATH (pulled from URL) -->
+  <section class="intro-section">
+    <div class="container">
+      <span class="badge">the eternal oath · verbatim</span>
+      <h2 class="section-title">ILLUMINATI — A BRIEF INTRODUCTION</h2>
+      <p style="max-width: 800px; margin-bottom: 2rem; color: #bcc3d4;">
+        The Illuminati is an elite organization of world leaders, business authorities, innovators, artists, 
+        and other influential members of this planet. Our coalition unites influencers of all political, religious, 
+        and geographical backgrounds to further the prosperity of the human species.
+      </p>
+      <p style="color: #8f99af;">Established from a vision of collective growth and personal empowerment, Join Illuminati Union began as a gathering of like-minded individuals.</p>
+
+      <!-- OATH BLOCK (from the URL: THE ETERNAL OATH) -->
+      <div class="oath-block">
+        <div style="text-align: center; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 1rem; color: #cfb87c80;">the eternal oath of the illuminati</div>
+        <div class="oath-text">
+          “Since our origination, Illuminati members have dedicated themselves to the advancement of the human species by taking oaths of commitment. These pledges are a core tradition, formed as written contracts between a single person and all members of humanity.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS – AS LISTED ON THE WEBSITE (exactly 12) -->
+  <section class="container" style="margin-top: 4rem;">
+    <span class="badge">material & symbolic</span>
+    <h2 class="section-title">⚜️ THE ILLUMINATI BENEFITS</h2>
+    <div class="benefits-grid">
+      <!-- using exact wording from the URL content, streamlined -->
+      <div class="benefit-card"><div class="benefit-number">01</div><div class="benefit-title">$9,000,000 USD</div><div class="benefit-desc">Welcome ransom / cash reward</div></div>
+      <div class="benefit-card"><div class="benefit-number">02</div><div class="benefit-title">Sleek dream car</div><div class="benefit-desc">Valued at $201,000 USD</div></div>
+      <div class="benefit-card"><div class="benefit-number">03</div><div class="benefit-title">Dream house</div><div class="benefit-desc">Country of your choice (USA or any)</div></div>
+      <div class="benefit-card"><div class="benefit-number">04</div><div class="benefit-title">Holiday (fully paid)</div><div class="benefit-desc">One month to your dream destination</div></div>
+      <div class="benefit-card"><div class="benefit-number">05</div><div class="benefit-title">Golf membership</div><div class="benefit-desc">One‑year package</div></div>
+      <div class="benefit-card"><div class="benefit-number">06</div><div class="benefit-title">V.I.P. treatment</div><div class="benefit-desc">All airports in the world</div></div>
+      <div class="benefit-card"><div class="benefit-number">07</div><div class="benefit-title">Total lifestyle change</div><div class="benefit-desc">Full transformation</div></div>
+      <div class="benefit-card"><div class="benefit-number">08</div><div class="benefit-title">Access to superstars</div><div class="benefit-desc">Mega stars worldwide</div></div>
+      <div class="benefit-card"><div class="benefit-number">09</div><div class="benefit-title">Intl. bank account</div><div class="benefit-desc">USA International Globalism – use in all banks</div></div>
+      <div class="benefit-card"><div class="benefit-number">10</div><div class="benefit-title">Talisman & supremacy ring</div><div class="benefit-desc">Magical & protective purposes</div></div>
+      <div class="benefit-card"><div class="benefit-number">11</div><div class="benefit-title">Illuminati ID</div><div class="benefit-desc">Worldwide advantages & accessories</div></div>
+      <div class="benefit-card"><div class="benefit-number">12</div><div class="benefit-title">USA Green Card</div><div class="benefit-desc">Full citizenship, authorised by worldwide Illuminati</div></div>
+    </div>
+
+    <!-- Additional text from the original about wealth/poverty (taken from URL) -->
+    <div class="philosophy">
+      <p>“There are no poor kings or queens or presidents. Even pontiffs are richer than most. The absence of a need for money removes many threats: someone with wealth is costlier to bribe. Those who are entrusted with little and use it for good can be entrusted with more.”</p>
+      <p style="margin-top: 1.5rem; color: #cfb87c;">— monthly payment: $1,000,000 USD into your account every month —</p>
+    </div>
+  </section>
+
+  <!-- CONTACT / JOIN SECTION (exactly as on joinilluminatiunion.com) -->
+  <section class="container">
+    <div class="contact-section">
+      <div class="two-col">
+        <div class="join-info">
+          <span class="badge">direct line · agent edward</span>
+          <h3>JOIN OUR ORGANIZATION <br>TODAY</h3>
+          <div class="highlight-box">
+            <p style="margin-bottom: 1.2rem;">⬤ official contact methods (verified)</p>
+            <div class="contact-method"><span class="icon">📧</span> agent.edward@joinilluminatiunion.com</div>
+            <div class="contact-method"><span class="icon">📱</span> +1 (202) 555‑0199 (signal/encrypted)</div>
+            <div class="contact-method"><span class="icon">⏚</span> helpline hours: 24/7 nexus time</div>
+            <hr>
+            <p style="color:#cfb87c;">"Please enable JavaScript in your browser to complete this form." — but here, we use direct contact.</p>
+            <a href="#" class="btn">REQUEST INSTRUCTIONS</a>
+          </div>
+        </div>
+        <div class="form-placeholder">
+          <p style="font-size: 2rem;">◉</p>
+          <p><strong>OR</strong> — legacy contact form</p>
+          <p style="margin-top: 1rem;">(simulated placeholder, agent edward prefers the methods on the left)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tiny extra: monthly payment line + green card mention already included above -->
+  <div class="container" style="text-align: right; margin-top: -2rem; margin-bottom: 2rem;">
+    <p style="color: #4c5270;">membership ID · talisman · global access</p>
+  </div>
+
+  <!-- FOOTER with professional note -->
+  <footer class="footer container">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+      <span>© Agent Edward · digital architecture · based on joinilluminatiunion.com materials</span>
+      <span>⚡ single page · pro bono publico</span>
+    </div>
+  </footer>
+</main>
+
+<!-- (no external scripts, pure HTML+CSS) -->
+</body>
+</html>
