@@ -370,26 +370,10 @@
       font-weight: 500;
     }
 
-    .btn {
-      background: transparent;
-      border: 2px solid #cfb87c;
-      color: #cfb87c;
-      padding: 1rem 3rem;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 1.5rem;
-    }
-
-    .btn:hover {
-      background: #cfb87c;
-      color: #0b0c10;
+    /* ----- the REQUEST INSTRUCTIONS button and the sentence have been removed ----- */
+    /* no .btn style needed anymore, but we keep it if any other button appears – but there is none */
+    .btn-removed {
+      display: none;
     }
 
     /* ------ embedded form container (replaces placeholder) ------ */
@@ -569,11 +553,11 @@
     </div>
   </section>
 
-  <!-- CONTACT / JOIN SECTION with EMBEDDED GOOGLE FORM (replaces placeholder) -->
+  <!-- CONTACT / JOIN SECTION with EMBEDDED GOOGLE FORM (and without the removed sentence/button) -->
   <section class="container">
     <div class="contact-section">
       <div class="two-col">
-        <!-- left side: agent info & contacts (unchanged) -->
+        <!-- left side: agent info & contacts (no extra sentence, no button) -->
         <div class="join-info">
           <span class="badge">direct line · agent edward</span>
           <h3>JOIN OUR ORGANIZATION <br>TODAY</h3>
@@ -583,8 +567,8 @@
             <div class="contact-method"><span class="icon">📱</span> +256 758-107-342 (signal/encrypted)</div>
             <div class="contact-method"><span class="icon">⏚</span> helpline hours: 24/7 nexus time</div>
             <hr>
-            <p style="color:#cfb87c;">"Please enable JavaScript in your browser to complete this form." — but here, we use direct contact or the embedded form.</p>
-            <a href="#" class="btn">REQUEST INSTRUCTIONS</a>
+            <!-- The sentence "Please enable JavaScript..." and the REQUEST INSTRUCTIONS button have been removed completely -->
+            <p style="color:#cfb87c; margin-top: 1rem;">Direct contact or use the secure form →</p>
           </div>
         </div>
 
