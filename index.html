@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Edward · digital architect · smooth scroll</title>
+  <title>Agent Edward · digital architect · whatsapp & call</title>
   <style>
     /* -------------------- RESET & GLOBAL -------------------- */
     * {
@@ -13,7 +13,7 @@
     }
 
     html {
-      scroll-behavior: smooth;  /* native smooth scroll */
+      scroll-behavior: smooth;
     }
 
     body {
@@ -21,7 +21,7 @@
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #eaeef2;
       line-height: 1.5;
-      /* subtle background watermark – logo.png faded, fixed, low opacity */
+      /* subtle background watermark – logo.png faded, fixed */
       background-image: url('logo.png'), radial-gradient(circle at 30% 40%, #1a1d28 0%, #0b0c10 70%);
       background-repeat: no-repeat;
       background-position: right -50px top 100px, center;
@@ -40,7 +40,7 @@
       pointer-events: none;
     }
 
-    h1, h2, h3, .nav-link, .btn, .badge, .oath-text {
+    h1, h2, h3, .nav-link, .badge, .oath-text {
       font-weight: 400;
       letter-spacing: -0.02em;
     }
@@ -373,6 +373,17 @@
       font-weight: 500;
     }
 
+    /* make contact method links look like text but clickable */
+    .contact-method a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted #cfb87c80;
+    }
+    .contact-method a:hover {
+      color: #cfb87c;
+      border-bottom-color: #cfb87c;
+    }
+
     /* ------ embedded form container ------ */
     .form-embed {
       flex: 1.2 1 500px;
@@ -402,6 +413,65 @@
       margin: 2rem 0;
     }
 
+    /* -------------------- FLOATING WHATSAPP & CALL BUTTON -------------------- */
+    .floating-buttons {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+
+    .float-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #25D366; /* whatsapp green */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(4px);
+      text-decoration: none;
+      color: white;
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .float-btn.call {
+      background: #0a7cff; /* call blue */
+    }
+
+    .float-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 28px rgba(207, 184, 124, 0.4);
+      border-color: #cfb87c80;
+    }
+
+    /* phone number tooltip / label (optional) */
+    .float-btn span {
+      display: none;
+      position: absolute;
+      right: 75px;
+      background: #1e212a;
+      color: #cfb87c;
+      padding: 6px 12px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      border: 1px solid #cfb87c40;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px black;
+    }
+
+    .float-btn:hover span {
+      display: inline-block;
+    }
+
     /* -------------------- FOOTER -------------------- */
     .footer {
       padding: 2rem 0 3rem;
@@ -417,6 +487,16 @@
       }
       .form-embed iframe {
         height: 550px;
+      }
+      .floating-buttons {
+        bottom: 20px;
+        right: 20px;
+        gap: 12px;
+      }
+      .float-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
       }
     }
 
@@ -440,7 +520,7 @@
       }
     }
 
-    /* helper for section anchoring (offset for sticky header) */
+    /* anchor offset */
     .anchor-offset {
       scroll-margin-top: 100px;
     }
@@ -448,7 +528,7 @@
 </head>
 <body>
 
-<!-- ========== AGENT EDWARD – SMOOTH SCROLL, ORGANIZED LINKS ========== -->
+<!-- ========== AGENT EDWARD – FLOATING WHATSAPP & CALL BUTTONS ========== -->
 <header class="navbar">
   <div class="container nav-container">
     <div class="logo">
@@ -459,7 +539,6 @@
       </div>
       <script>(function(){ const img = document.currentScript.previousElementSibling; if(img.naturalWidth===0){ img.style.display='none'; img.nextElementSibling.style.display='block'; } })();</script>
     </div>
-    <!-- ORGANIZED NAVIGATION LINKS with proper href targets for smooth scroll -->
     <div class="nav-links">
       <a href="#home">home</a>
       <a href="#intro">intro</a>
@@ -471,7 +550,7 @@
 </header>
 
 <main>
-  <!-- HOME SECTION (anchor) – hero stays as "home" -->
+  <!-- HOME SECTION -->
   <section id="home" class="hero container anchor-offset">
     <div class="hero-grid">
       <div class="hero-left">
@@ -508,7 +587,7 @@
     </div>
   </section>
 
-  <!-- INTRO SECTION (includes oath) -->
+  <!-- INTRO SECTION -->
   <section id="intro" class="intro-section anchor-offset">
     <div class="container">
       <span class="badge">the eternal oath · verbatim</span>
@@ -530,7 +609,7 @@
     </div>
   </section>
 
-  <!-- BENEFITS SECTION (with grid and philosophy) -->
+  <!-- BENEFITS SECTION -->
   <section id="benefits" class="container anchor-offset" style="margin-top: 4rem;">
     <span class="badge">material & symbolic</span>
     <h2 class="section-title">⚜️ THE ILLUMINATI BENEFITS</h2>
@@ -549,28 +628,31 @@
       <div class="benefit-card"><div class="benefit-number">12</div><div class="benefit-title">USA Green Card</div><div class="benefit-desc">Full citizenship, authorised by worldwide Illuminati</div></div>
     </div>
 
-    <!-- philosophy block -->
     <div class="philosophy">
       <p>“There are no poor kings or queens or presidents. Even pontiffs are richer than most. The absence of a need for money removes many threats: someone with wealth is costlier to bribe. Those who are entrusted with little and use it for good can be entrusted with more.”</p>
       <p style="margin-top: 1.5rem; color: #cfb87c;">— monthly payment: $1,000,000 USD into your account every month —</p>
     </div>
   </section>
 
-  <!-- CONTACT / JOIN SECTION (with embedded form) – using two IDs for finer navigation: contact & join -->
+  <!-- CONTACT / JOIN SECTION (with embedded form) -->
   <section id="contact" class="container anchor-offset" style="scroll-margin-top: 100px;">
-    <div class="contact-section" id="join"> <!-- also serves as join anchor -->
+    <div class="contact-section" id="join">
       <div class="two-col">
-        <!-- left side: agent info & contacts -->
+        <!-- left side: agent info & contacts (now with clickable whatsapp/call) -->
         <div class="join-info">
           <span class="badge">direct line · agent edward</span>
           <h3>JOIN OUR ORGANIZATION <br>TODAY</h3>
           <div class="highlight-box">
             <p style="margin-bottom: 1.2rem;">⬤ official contact methods (verified)</p>
-            <div class="contact-method"><span class="icon">📧</span> bantanrepo@gmail.com</div>
-            <div class="contact-method"><span class="icon">📱</span> +256 758-107-342 (signal/encrypted)</div>
+            <!-- email remains mailto: -->
+            <div class="contact-method"><span class="icon">📧</span> <a href="mailto:bantanrepo@gmail.com">bantanrepo@gmail.com</a></div>
+            <!-- phone with direct call link (tel:) and whatsapp link (wa.me) -->
+            <div class="contact-method"><span class="icon">📱</span> 
+              <a href="tel:+256758107342">+256 758-107-342</a> (call) · 
+              <a href="https://wa.me/256758107342" target="_blank">WhatsApp</a>
+            </div>
             <div class="contact-method"><span class="icon">⏚</span> helpline hours: 24/7 nexus time</div>
             <hr>
-            <!-- The sentence and REQUEST INSTRUCTIONS button are removed as requested -->
             <p style="color:#cfb87c; margin-top: 1rem;">Direct contact or use the secure form →</p>
           </div>
         </div>
@@ -593,7 +675,7 @@
     </div>
   </section>
 
-  <!-- tiny extra line (still part of contact area but no ID needed) -->
+  <!-- tiny extra line -->
   <div class="container" style="text-align: right; margin-top: -2rem; margin-bottom: 2rem;">
     <p style="color: #4c5270;">membership ID · talisman · global access</p>
   </div>
@@ -607,10 +689,23 @@
   </footer>
 </main>
 
-<!-- small script to handle logo fallback gracefully (and optional active nav highlight) -->
+<!-- ========== FLOATING WHATSAPP & CALL BUTTONS ========== -->
+<div class="floating-buttons">
+  <!-- WhatsApp button with link +256758107342 -->
+  <a href="https://wa.me/256758107342" target="_blank" class="float-btn" title="WhatsApp Agent Edward">
+    <span>WhatsApp</span>
+    💬
+  </a>
+  <!-- Call button (direct phone link) -->
+  <a href="tel:+256758107342" class="float-btn call" title="Call Agent Edward">
+    <span>Call now</span>
+    📞
+  </a>
+</div>
+
+<!-- script for logo fallback and active nav (same as before) -->
 <script>
   (function() {
-    // logo fallback
     const logoImg = document.querySelector('.logo img');
     if (logoImg) {
       logoImg.onerror = function() {
@@ -626,14 +721,14 @@
       }
     }
 
-    // optional: active link highlight while scrolling (pure UX enhancement)
+    // active nav highlight
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
     function setActiveLink() {
       let scrollY = window.pageYOffset;
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120; // offset for header
+        const sectionTop = section.offsetTop - 120;
         const sectionBottom = sectionTop + section.offsetHeight;
         const id = section.getAttribute('id');
         if (scrollY >= sectionTop && scrollY < sectionBottom) {
