@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Edward · digital architect · form embedded</title>
+  <title>Agent Edward · digital architect · smooth scroll</title>
   <style>
     /* -------------------- RESET & GLOBAL -------------------- */
     * {
@@ -12,12 +12,15 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;  /* native smooth scroll */
+    }
+
     body {
       background: #0b0c10;
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #eaeef2;
       line-height: 1.5;
-      scroll-behavior: smooth;
       /* subtle background watermark – logo.png faded, fixed, low opacity */
       background-image: url('logo.png'), radial-gradient(circle at 30% 40%, #1a1d28 0%, #0b0c10 70%);
       background-repeat: no-repeat;
@@ -333,7 +336,7 @@
       display: flex;
       gap: 3rem;
       flex-wrap: wrap;
-      align-items: flex-start; /* align top for form */
+      align-items: flex-start;
     }
 
     .join-info {
@@ -370,15 +373,9 @@
       font-weight: 500;
     }
 
-    /* ----- the REQUEST INSTRUCTIONS button and the sentence have been removed ----- */
-    /* no .btn style needed anymore, but we keep it if any other button appears – but there is none */
-    .btn-removed {
-      display: none;
-    }
-
-    /* ------ embedded form container (replaces placeholder) ------ */
+    /* ------ embedded form container ------ */
     .form-embed {
-      flex: 1.2 1 500px;        /* give it more space */
+      flex: 1.2 1 500px;
       background: rgba(0, 0, 0, 0.3);
       border-radius: 30px;
       padding: 1.5rem;
@@ -389,9 +386,9 @@
 
     .form-embed iframe {
       width: 100%;
-      height: 560px;             /* a bit taller to show full content */
+      height: 560px;
       border-radius: 20px;
-      background: #0f111a;       /* dark bg while loading */
+      background: #0f111a;
       border: 2px solid #cfb87c20;
       transition: border 0.2s;
     }
@@ -442,11 +439,16 @@
         background-size: 300px auto, cover;
       }
     }
+
+    /* helper for section anchoring (offset for sticky header) */
+    .anchor-offset {
+      scroll-margin-top: 100px;
+    }
   </style>
 </head>
 <body>
 
-<!-- ========== AGENT EDWARD – EMBEDDED GOOGLE FORM ========== -->
+<!-- ========== AGENT EDWARD – SMOOTH SCROLL, ORGANIZED LINKS ========== -->
 <header class="navbar">
   <div class="container nav-container">
     <div class="logo">
@@ -455,21 +457,22 @@
       <div class="logo-text" style="display: none;">
         AGENT EDWARD <span>digital architect</span>
       </div>
-      <!-- fallback in case image missing: show text -->
       <script>(function(){ const img = document.currentScript.previousElementSibling; if(img.naturalWidth===0){ img.style.display='none'; img.nextElementSibling.style.display='block'; } })();</script>
     </div>
+    <!-- ORGANIZED NAVIGATION LINKS with proper href targets for smooth scroll -->
     <div class="nav-links">
-      <a href="#">intro</a>
-      <a href="#">benefits</a>
-      <a href="#">contact</a>
-      <a href="#">join</a>
+      <a href="#home">home</a>
+      <a href="#intro">intro</a>
+      <a href="#benefits">benefits</a>
+      <a href="#contact">contact</a>
+      <a href="#join">join</a>
     </div>
   </div>
 </header>
 
 <main>
-  <!-- HERO SECTION -->
-  <section class="hero container">
+  <!-- HOME SECTION (anchor) – hero stays as "home" -->
+  <section id="home" class="hero container anchor-offset">
     <div class="hero-grid">
       <div class="hero-left">
         <div class="badge">✦ official liaison ✦</div>
@@ -505,8 +508,8 @@
     </div>
   </section>
 
-  <!-- BRIEF INTRODUCTION + OATH -->
-  <section class="intro-section">
+  <!-- INTRO SECTION (includes oath) -->
+  <section id="intro" class="intro-section anchor-offset">
     <div class="container">
       <span class="badge">the eternal oath · verbatim</span>
       <h2 class="section-title">ILLUMINATI — A BRIEF INTRODUCTION</h2>
@@ -527,8 +530,8 @@
     </div>
   </section>
 
-  <!-- BENEFITS GRID -->
-  <section class="container" style="margin-top: 4rem;">
+  <!-- BENEFITS SECTION (with grid and philosophy) -->
+  <section id="benefits" class="container anchor-offset" style="margin-top: 4rem;">
     <span class="badge">material & symbolic</span>
     <h2 class="section-title">⚜️ THE ILLUMINATI BENEFITS</h2>
     <div class="benefits-grid">
@@ -553,11 +556,11 @@
     </div>
   </section>
 
-  <!-- CONTACT / JOIN SECTION with EMBEDDED GOOGLE FORM (and without the removed sentence/button) -->
-  <section class="container">
-    <div class="contact-section">
+  <!-- CONTACT / JOIN SECTION (with embedded form) – using two IDs for finer navigation: contact & join -->
+  <section id="contact" class="container anchor-offset" style="scroll-margin-top: 100px;">
+    <div class="contact-section" id="join"> <!-- also serves as join anchor -->
       <div class="two-col">
-        <!-- left side: agent info & contacts (no extra sentence, no button) -->
+        <!-- left side: agent info & contacts -->
         <div class="join-info">
           <span class="badge">direct line · agent edward</span>
           <h3>JOIN OUR ORGANIZATION <br>TODAY</h3>
@@ -567,12 +570,12 @@
             <div class="contact-method"><span class="icon">📱</span> +256 758-107-342 (signal/encrypted)</div>
             <div class="contact-method"><span class="icon">⏚</span> helpline hours: 24/7 nexus time</div>
             <hr>
-            <!-- The sentence "Please enable JavaScript..." and the REQUEST INSTRUCTIONS button have been removed completely -->
+            <!-- The sentence and REQUEST INSTRUCTIONS button are removed as requested -->
             <p style="color:#cfb87c; margin-top: 1rem;">Direct contact or use the secure form →</p>
           </div>
         </div>
 
-        <!-- RIGHT SIDE: EMBEDDED GOOGLE FORM (exactly as requested) -->
+        <!-- RIGHT SIDE: EMBEDDED GOOGLE FORM -->
         <div class="form-embed">
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdChbhf9MltzCHrMD4YhxFQSS-NzTye4RMbg4SGbEWpfPC7ag/viewform?embedded=true" 
                   width="100%" 
@@ -590,7 +593,7 @@
     </div>
   </section>
 
-  <!-- tiny extra line -->
+  <!-- tiny extra line (still part of contact area but no ID needed) -->
   <div class="container" style="text-align: right; margin-top: -2rem; margin-bottom: 2rem;">
     <p style="color: #4c5270;">membership ID · talisman · global access</p>
   </div>
@@ -604,9 +607,10 @@
   </footer>
 </main>
 
-<!-- small script to handle logo fallback gracefully -->
+<!-- small script to handle logo fallback gracefully (and optional active nav highlight) -->
 <script>
   (function() {
+    // logo fallback
     const logoImg = document.querySelector('.logo img');
     if (logoImg) {
       logoImg.onerror = function() {
@@ -621,6 +625,32 @@
         document.querySelector('.logo-text').style.display = 'block';
       }
     }
+
+    // optional: active link highlight while scrolling (pure UX enhancement)
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    function setActiveLink() {
+      let scrollY = window.pageYOffset;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120; // offset for header
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const id = section.getAttribute('id');
+        if (scrollY >= sectionTop && scrollY < sectionBottom) {
+          navLinks.forEach(link => {
+            link.style.color = '#bdc3d0';
+            link.style.borderBottomColor = 'transparent';
+            if (link.getAttribute('href') === '#' + id) {
+              link.style.color = '#cfb87c';
+              link.style.borderBottomColor = '#cfb87c';
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('load', setActiveLink);
   })();
 </script>
 
